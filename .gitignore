@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+.env.*
+dist/
+build/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Alembic migrations output
+backend/app/alembic/versions/
+
+# Local databases & data
+backend/app.db
+backend/.data/
+
+# Briefcase/Build artifacts
+mobile/**/build/
+mobile/**/dist/
+mobile/**/.briefcase/
+mobile/**/__pycache__/
+
+

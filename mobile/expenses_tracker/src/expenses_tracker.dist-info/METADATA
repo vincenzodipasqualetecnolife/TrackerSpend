@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Briefcase-Version: 0.3.24
+Name: expenses_tracker
+Formal-Name: Expenses Tracker
+App-ID: com.example.expenses-tracker
+Version: 0.1.0
+Home-page: https://example.com
+Download-URL: https://example.com
+Author: AI Tracker
+Author-email: dev@example.com
+Summary: App di monitoraggio spese con backend FastAPI
