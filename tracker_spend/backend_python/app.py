@@ -13,13 +13,17 @@ from category_service import CategoryService
 from budget_service import BudgetService
 from goal_service import GoalService
 from dashboard_service import DashboardService
+from railway_config import get_database_config, get_jwt_config, get_cors_config
 
 app = Flask(__name__)
+
+# Configurazione CORS per Railway
+cors_config = get_cors_config()
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3001", "http://127.0.0.1:3001"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "origins": cors_config['origins'],
+        "methods": cors_config['methods'],
+        "allow_headers": cors_config['allow_headers']
     }
 })
 
@@ -27,14 +31,8 @@ CORS(app, resources={
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Database configuration
-DB_CONFIG = {
-    'host': 'mysql',
-    'port': 3306,
-    'user': 'tracker_user',
-    'password': 'tracker_password',
-    'database': 'tracker_spend'
-}
+# Database configuration per Railway
+DB_CONFIG = get_database_config()
 
 # Inizializza servizi
 csv_parser = CSVTransactionParser()
@@ -143,10 +141,23 @@ create_auth_tables()
 @app.route('/health', methods=['GET'])
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    """Health check endpoint"""
+    """Health check endpoint per Railway"""
+    try:
+        # Test connessione database
+        connection = get_db_connection()
+        if connection:
+            connection.close()
+            db_status = 'connected'
+        else:
+            db_status = 'disconnected'
+    except Exception as e:
+        db_status = f'error: {str(e)}'
+    
     return jsonify({
         'status': 'ok',
-        'timestamp': datetime.now().isoformat()
+        'timestamp': datetime.now().isoformat(),
+        'database': db_status,
+        'environment': os.environ.get('NODE_ENV', 'development')
     })
 
 @app.route('/api/auth/register', methods=['POST'])

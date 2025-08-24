@@ -15,7 +15,12 @@
     "dev:backend": "cd backend_python && python app.py",
     "dev:frontend": "cd frontend && npm run dev"
   },
-  "keywords": ["finance", "tracker", "ai", "expenses"],
+  "keywords": [
+    "finance",
+    "tracker",
+    "ai",
+    "expenses"
+  ],
   "author": "Vincenzo Di Pasquale",
   "license": "MIT",
   "devDependencies": {
