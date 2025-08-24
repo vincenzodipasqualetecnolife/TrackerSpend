@@ -1,0 +1,28 @@
+{
+  "name": "tracker-spend",
+  "version": "1.0.0",
+  "description": "TrackerSpend - App di gestione spese con AI",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd backend_python && python app.py",
+    "start:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend_python && pip install -r requirements.txt",
+    "install:frontend": "cd frontend && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend_python && python app.py",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "keywords": ["finance", "tracker", "ai", "expenses"],
+  "author": "Vincenzo Di Pasquale",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+date,description,amount,type,category
+2024-01-15,Stipendio gennaio,2500.00,income,Stipendio
+2024-01-16,Spesa supermercato,85.50,expense,Alimentari
+2024-01-17,Benzina auto,45.00,expense,Trasporti
+2024-01-18,Cinema,12.00,expense,Intrattenimento
+2024-01-19,Bolletta luce,120.00,expense,Casa
+2024-01-20,Freelance progetto,500.00,income,Freelance
+2024-01-21,Ristorante,35.00,expense,Alimentari
+2024-01-22,Metro,25.00,expense,Trasporti
+2024-01-23,Shopping vestiti,89.99,expense,Shopping
+2024-01-24,Visita medico,50.00,expense,Salute

@@ -1,0 +1,22 @@
+docker compose build dart-backend# Flutter files
+lib/
+android/
+ios/
+web/
+windows/
+macos/
+linux/
+test/
+integration_test/
+
+# Flutter generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+*.iml
+
+# Keep only what we need for simple backend
+!bin/api_simple.dart
+!pubspec_simple.yaml

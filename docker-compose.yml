@@ -1,32 +1,64 @@
-
 services:
-  db:
-    image: postgres:16
-    restart: unless-stopped
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-ai_tracker}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ai_tracker}
-      POSTGRES_DB: ${POSTGRES_DB:-ai_tracker}
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: tracker_spend
+      MYSQL_USER: tracker_user
+      MYSQL_PASSWORD: tracker_password
     volumes:
-      - ./backend/.data/postgres:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
+      - mysql-data:/var/lib/mysql
+      - ./tracker_spend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
-  backend:
-    build: ./backend
-    restart: unless-stopped
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - db
-    volumes:
-      - ./backend/app:/app/app
+  # Backend Python
+  python-backend:
+    build:
+      context: ./tracker_spend/backend_python
+      dockerfile: Dockerfile
     ports:
-      - "8000:8000"
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      - "3001:3001"
+      - "8080:8080"
+    volumes:
+      - flutter-data:/app/data
+    environment:
+      - FLUTTER_WEB_PORT=8080
+      - API_SERVER_PORT=3001
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=tracker_spend
+      - MYSQL_USER=tracker_user
+      - MYSQL_PASSWORD=tracker_password
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # Frontend React
+  react-frontend:
+    build:
+      context: ./tracker_spend/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./tracker_spend/frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    depends_on:
+      - python-backend
+    command: npm run dev -- --host 0.0.0.0
 
 volumes:
-  postgres-data:
-    driver: local
+  flutter-data:
+  mysql-data:
+  
 
 

@@ -1,0 +1,19 @@
+FROM dart:stable
+
+# Set working directory
+WORKDIR /app
+
+# Copy pubspec files
+COPY pubspec_simple.yaml pubspec.yaml
+
+# Get dependencies
+RUN dart pub get
+
+# Copy source code
+COPY bin/api_simple.dart bin/api.dart
+
+# Expose port
+EXPOSE 3001
+
+# Start the application
+CMD ["dart", "run", "bin/api.dart"]

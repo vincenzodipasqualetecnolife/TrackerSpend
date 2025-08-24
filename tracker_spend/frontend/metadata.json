@@ -1,0 +1,5 @@
+{
+  "name": "Stile Buddy - Budget Planner",
+  "description": "A modern and intuitive user interface for a personal finance and budgeting application, inspired by Buddy – Budget & Save Money. It features a dashboard with spending charts, budget tracking with progress bars, transaction lists, and settings management, all operating with mock data.",
+  "requestFramePermissions": []
+}
