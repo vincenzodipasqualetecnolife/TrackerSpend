@@ -4,7 +4,7 @@
   "description": "TrackerSpend - App di gestione spese con AI",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start": "python3 backend_python/app.py",
     "start:backend": "cd backend_python && python app.py",
     "start:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
@@ -13,7 +13,8 @@
     "install:frontend": "cd frontend && npm install",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend_python && python app.py",
-    "dev:frontend": "cd frontend && npm run dev"
+    "dev:frontend": "cd frontend && npm run dev",
+    "railway:start": "python3 backend_python/app.py"
   },
   "keywords": [
     "finance",

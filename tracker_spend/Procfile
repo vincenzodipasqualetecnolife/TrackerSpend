@@ -1,1 +1,1 @@
-web: npm run start
+web: python3 backend_python/app.py

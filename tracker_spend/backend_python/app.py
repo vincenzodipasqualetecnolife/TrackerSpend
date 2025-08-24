@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import mysql.connector
 from mysql.connector import Error
@@ -1785,6 +1785,16 @@ def get_user_id_from_token(token):
     except Exception as e:
         logger.error(f"Errore recupero utente da token: {e}")
         return None
+
+# Route per servire il frontend buildato
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    """Serve il frontend React buildato"""
+    if path and os.path.exists(os.path.join('../frontend/dist', path)):
+        return send_from_directory('../frontend/dist', path)
+    else:
+        return send_from_directory('../frontend/dist', 'index.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 3001))

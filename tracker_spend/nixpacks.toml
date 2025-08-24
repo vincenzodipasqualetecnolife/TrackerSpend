@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs", "python3", "pip"]
+nixPkgs = ["nodejs_18", "python3", "pip"]
 
 [phases.install]
 cmds = [
@@ -10,8 +10,12 @@ cmds = [
 
 [phases.build]
 cmds = [
-  "cd frontend && npm run build"
+  "cd frontend && npm run build",
+  "echo 'Frontend built successfully'"
 ]
 
 [start]
-cmd = "npm start"
+cmd = "python3 backend_python/app.py"
+
+[variables]
+NODE_ENV = "production"

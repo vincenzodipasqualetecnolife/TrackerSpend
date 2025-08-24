@@ -1,0 +1,36 @@
+# File di sviluppo
+*.log
+.env
+.env.local
+.env.development
+.env.test
+
+# Node modules (verranno installati da Railway)
+node_modules/
+frontend/node_modules/
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentazione
+README.md
+DEPLOYMENT.md
+*.md
+
+# Script di sviluppo
+railway-deploy.sh
+build.sh
