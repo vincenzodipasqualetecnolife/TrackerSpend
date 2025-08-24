@@ -10,12 +10,8 @@ cmds = [
 
 [phases.build]
 cmds = [
-  "cd frontend && npm run build",
-  "echo 'Frontend built successfully'"
+  "cd frontend && npm run build"
 ]
 
 [start]
-cmd = "python3 backend_python/app.py"
-
-[variables]
-NODE_ENV = "production"
+cmd = "bash start.sh"
